@@ -43,7 +43,7 @@ def post_merchandise():
 @app.route("/sales", methods=["GET"])
 def get_sales():
     with psycopg.connect(**connection_args) as connection:
-        sql = """SELECT * FROM 売上データ;"""
+        sql = """SELECT * FROM 売上データ order by 売上日 DESC;"""
         cursor = connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()

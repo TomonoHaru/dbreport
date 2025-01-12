@@ -17,18 +17,35 @@ const App = () => {
                 <aside>
                   <p className="menu-label">売上記録</p>
                   <ul>
-                    <li>
-                      <Link to="/sales/record">記録</Link>
-                    </li>
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      component={Link}
+                      to="/sales/record"
+                    >
+                      記録
+                    </Button>
                   </ul>
                   <p className="menu-label">売上管理</p>
                   <ul>
-                    <li>
-                      <Link to="/sales/list">売上一覧</Link>
-                    </li>
-                    <li>
-                      <Link to="/sales/monthly">売上合計</Link>
-                    </li>
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      component={Link}
+                      to="/sales/list"
+                    >
+                      売上一覧
+                    </Button>
+                  </ul>
+                  <ul>
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      component={Link}
+                      to="/sales/monthly"
+                    >
+                      売上合計
+                    </Button>
                   </ul>
                 </aside>
               </div>
