@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSales } from "../../api";
+import { deleteSale, getSales } from "../../api";
 import {
   Box,
   Button,
@@ -43,6 +43,16 @@ export const SalesList = () => {
                 <TableCell>{sale[0]}</TableCell>
                 <TableCell>{sale[1]}</TableCell>
                 <TableCell>{sale[2]}</TableCell>
+                <TableCell>
+                  <Button
+                    size="small"
+                    onClick={async () => {
+                      await deleteSale(sale[3]);
+                    }}
+                  >
+                    消去
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -9,7 +9,6 @@ import {
   Box,
 } from "@mui/material";
 import { postProduct } from "../../api";
-import { Link } from "react-router-dom";
 
 export const NewProduct = () => {
   const [name, setName] = useState("");
@@ -43,7 +42,6 @@ export const NewProduct = () => {
             price: price,
           };
           await postProduct(data);
-          console.log(1);
           setName("");
           setPrice("");
         }}

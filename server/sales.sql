@@ -1,7 +1,6 @@
 drop table if exists 商品データ;
 
 create table 商品データ(
-    id serial primary key,
     商品名 text not null unique,
     金額 integer not null
 );
