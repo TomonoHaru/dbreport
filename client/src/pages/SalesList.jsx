@@ -10,10 +10,17 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 
 export const SalesList = () => {
   const [sales, setSales] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedSale, setSelectedSale] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -21,7 +28,6 @@ export const SalesList = () => {
       setSales(data);
     })();
   }, []);
-  console.log(sales);
 
   return (
     <Box>
@@ -46,8 +52,9 @@ export const SalesList = () => {
                 <TableCell>
                   <Button
                     size="small"
-                    onClick={async () => {
-                      await deleteSale(sale[3]);
+                    onClick={() => {
+                      setSelectedSale(sale[3]);
+                      setOpen(true);
                     }}
                   >
                     消去
@@ -58,6 +65,40 @@ export const SalesList = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Dialog
+        open={open}
+        onClick={() => {
+          setOpen(false);
+          setSelectedSale(null);
+        }}
+      >
+        <DialogTitle>削除の確認</DialogTitle>
+        <DialogContent>
+          <DialogContentText>本当に削除しますか？</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setOpen(false);
+              setSelectedSale(null);
+            }}
+            color="primary"
+          >
+            キャンセル
+          </Button>
+          <Button
+            onClick={async () => {
+              await deleteSale(selectedSale);
+              const data = await getSales();
+              setSales(data);
+            }}
+            color="error"
+          >
+            削除
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

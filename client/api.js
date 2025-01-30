@@ -52,7 +52,7 @@ export const getMonthlySales = () => {
 };
 
 export const deleteSale = (saleId) => {
-  return fetch(`/sales/${saleId}`, {
+  return request(`/sales/${saleId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

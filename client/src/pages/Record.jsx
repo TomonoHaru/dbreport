@@ -62,6 +62,11 @@ export const Record = () => {
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
+              InputProps={{
+                inputProps: {
+                  min: 1,
+                },
+              }}
               sx={{ width: 200 }}
             />
           </Field>
@@ -79,6 +84,10 @@ export const Record = () => {
       <Box sx={{ marginTop: 2 }}>
         <Button
           onClick={async () => {
+            if (!selectedMerchandise || !quantity) {
+              alert("商品名と価格を入力してください");
+              return;
+            }
             const data = {
               name: selectedMerchandise[0],
               day: day,
@@ -86,6 +95,12 @@ export const Record = () => {
             };
 
             await postSales(data);
+
+            alert("売り上げを記録しました！");
+            console.log(merchandise);
+
+            setSelectedMerchandise("");
+            setQuantity("");
           }}
           variant="contained"
           color="primary"
