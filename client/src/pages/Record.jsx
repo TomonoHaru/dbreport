@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMerchandise, postMerchandise, postSales } from "../../api";
+import { getMerchandise, postSales } from "../../api";
 import { Field } from "../components/Field";
 import {
   Box,
@@ -12,14 +12,13 @@ import {
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { ProductRegister } from "../components/ProductRegister";
+import { Link } from "react-router-dom";
 
 export const Record = () => {
   const [merchandise, setMerchandise] = useState([]);
   const [day, setDay] = useState(dayjs());
   const [selectedMerchandise, setSelectedMerchandise] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [productRegisterActive, setProductRegisterActive] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -27,16 +26,6 @@ export const Record = () => {
       setMerchandise(data);
     })();
   }, []);
-
-  const handleProductRegisterClose = () => {
-    setProductRegisterActive(false);
-  };
-
-  const handleProductRegistered = async () => {
-    const updatedMerchandise = await getMerchandise();
-    setMerchandise(updatedMerchandise);
-    setProductRegisterActive(false);
-  };
 
   return (
     <Box sx={{ minWidth: 240 }}>
@@ -56,9 +45,13 @@ export const Record = () => {
             </Select>
           </Field>
         </FormControl>
-
         <Box sx={{ marginTop: 2 }}>
-          <Button onClick={() => setProductRegisterActive(true)}>
+          <Button
+            variant="outlined"
+            size="small"
+            component={Link}
+            to="/sales/newProduct"
+          >
             新規登録
           </Button>
         </Box>
@@ -109,13 +102,6 @@ export const Record = () => {
           登録
         </Button>
       </Box>
-
-      {productRegisterActive && (
-        <ProductRegister
-          onRegister={handleProductRegistered}
-          onClose={handleProductRegisterClose}
-        />
-      )}
     </Box>
   );
 };

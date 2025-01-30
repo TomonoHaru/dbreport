@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Record } from "./pages/Record";
 import { SalesList } from "./pages/SalesList";
 import { MounthlyTotal } from "./pages/MounthlyTotal";
+import { NewProduct } from "./pages/NewProduct";
 const App = () => {
   return (
     <div>
@@ -55,6 +56,7 @@ const App = () => {
                 <Route path="/sales/record" element={<Record />} />
                 <Route path="/sales/list" element={<SalesList />} />
                 <Route path="/sales/monthly" element={<MounthlyTotal />} />
+                <Route path="/sales/newProduct" element={<NewProduct />} />
               </Routes>
             </div>
           </div>

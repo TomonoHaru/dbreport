@@ -27,19 +27,6 @@ def get_merchandise():
     return jsonify(result)
 
 
-@app.route("/merchandise", methods=["POST"])
-def post_merchandise():
-    merchandise = request.json
-    name = merchandise.get("name")
-    amount = merchandise.get("amount")
-    with psycopg.connect(**connection_args) as connection:
-        sql = """insert into 商品データ(商品名,金額) values(%s,%s)"""
-        cursor = connection.cursor()
-        cursor.execute(sql, (merchandise, (name, amount)))
-        connection.commit()
-    return jsonify({"message": "商品データが登録されました"})
-
-
 @app.route("/sales", methods=["GET"])
 def get_sales():
     with psycopg.connect(**connection_args) as connection:
@@ -108,11 +95,9 @@ def add_product():
     price = data["price"]
 
     with psycopg.connect(**connection_args) as connection:
-        sql = "INSERT INTO 商品データ (商品名, 金額) VALUES (%s, %s)"
-        try:
-            connection.execute(sql, (name, price))
-            connection.commit()
-        except psycopg.errors.UniqueViolation:
-            return jsonify({"error": "商品名が既に存在します"}), 400
+        sql = """INSERT INTO 商品データ (商品名, 金額) VALUES (%s, %s)"""
+        cursor = connection.cursor()
+        cursor.execute(sql, (name, price))
+        connection.commit()
 
     return jsonify({"message": "商品が登録されました"})

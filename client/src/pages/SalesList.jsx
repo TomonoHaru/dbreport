@@ -21,7 +21,6 @@ export const SalesList = () => {
       setSales(data);
     })();
   }, []);
-
   console.log(sales);
 
   return (
