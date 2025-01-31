@@ -1,13 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  TextField,
-  DialogActions,
-  Button,
-  Box,
-} from "@mui/material";
+import React, { useState } from "react";
+import { TextField, Button, Box } from "@mui/material";
 import { postProduct } from "../../api";
 
 export const NewProduct = () => {

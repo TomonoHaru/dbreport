@@ -1,7 +1,7 @@
 drop table if exists 商品データ;
 
 create table 商品データ(
-    商品名 text not null unique,
+    商品名 text not null unique primary key,
     金額 integer not null
 );
 
